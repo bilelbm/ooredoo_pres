@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="http://netcup-gutschein.x5c.de/loading-modal/js/jquery.loadingModal.js" type="text/javascript"></script>
+<link rel="stylesheet" href="http://netcup-gutschein.x5c.de/loading-modal/css/jquery.loadingModal.css" type="text/css" />
+</head>
+<body>
+
+<div id="container" class="container">
+	
+</div>
+</body>
+
+<script type="text/javascript">
+$( document ).ready(function() {
+	$('body').loadingModal({text: 'Waiting for commands...', 'animation': 'circle'});
+	 var socket = io.connect('http://localhost:3000');
+
+	 socket.on('connect', function () {
+    	console.log("cnx");
+    	socket.emit('pc_client', '');
+    	//console.log(data);
+    	/*socket.on('play_video', function (videoId) {
+		 	console.log("play_video"+videoId);
+			$("#container").html('<iframe width="560" height="315" src="https://www.youtube.com/embed/'+videoId+'?autoplay=1" frameborder="0" allowfullscreen></iframe>')
+		});*/
+		socket.on('cmd', function (videoId) {
+			window.location.href = 'http://localhost:3300/cmd';
+			return;
+		});
+	});
+
+
+});
+</script>
+</html>
+

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test</title>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+<script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+
+<div class=action id=1>Play unreal video</div>
+<div class=action id=2>Action 2</div>
+<div class=action id=3>Action 3</div>
+<div class=action id=4>Action 4</div>
+</body>
+
+<script type="text/javascript">
+	$( document ).ready(function() {
+		 var socket = io.connect('http://localhost:3000');
+
+		 socket.on('connect', function () {
+        	console.log("cnx presenter");
+
+        	socket.emit('presenter', "");
+   		 });
+		$(".action").on("click", function(){
+			socket.emit('event', $(this).attr("id"));
+		})
+		});
+</script>
+</html>
+
